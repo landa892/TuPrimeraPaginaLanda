@@ -1,1 +1,28 @@
+<h1>Lista de Artículos</h1>
+<ul>
+  {% for articulo in object_list %}
+    <li><a href="{% url 'articulo_detail' articulo.pk %}">{{ articulo.titulo }}</a></li>
+  {% endfor %}
+</ul>
+<a href="{% url 'articulo_create' %}">Crear nuevo artículo</a>
+
+<h1>{{ object.titulo }}</h1>
+<p>{{ object.contenido }}</p>
+<p>Autor: {{ object.autor }}</p>
+<p>Categoría: {{ object.categoria }}</p>
+<a href="{% url 'articulo_update' object.pk %}">Editar</a> |
+<a href="{% url 'articulo_delete' object.pk %}">Eliminar</a>
+
+<h1>{% if object %}Editar Artículo{% else %}Nuevo Artículo{% endif %}</h1>
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar</button>
+</form>
+
+
+<h1>¿Eliminar "{{ object }}"?</h1>
+<form method="post">{% csrf_token %}
+  <button type="submit">Sí, eliminar</button>
+</form>
+<a href="{% url 'articulo_list' %}">Cancelar</a>
 
